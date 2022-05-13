@@ -50,28 +50,28 @@
             let isbn = document.getElementById("id_isbn").value
             let author = document.getElementById("id_author").value
             xhr.onload= function(){
-                id = JSON.parse(xhr.responseText)
+                idtex = JSON.parse(xhr.responseText)
                 newelem = document.createElement("div")  //document.getElementById(`container-id`)
-                newelem.setAttribute("id", `container-${id["books"].id}`)
+                newelem.setAttribute("id", `container-${idtex["books"].id}`)
 
                 newelem.innerHTML =` <div id="individual_book">
 
-            <p id="book-${id["books"].id}">${id["books"].name}</p>
-            <p id="book-author-${id["books"].id}">${id["books"].author}</p>
-            <p id="book-isbn-${id["books"].id}">${id["books"].isbn}</p>
+            <p id="book-${idtex["books"].id}">${idtex["books"].name}</p>
+            <p id="book-author-${idtex["books"].id}">${idtex["books"].author}</p>
+            <p id="book-isbn-${idtex["books"].id}">${idtex["books"].isbn}</p>
 
-    <button id="update-${id["books"].id}" value="Update"
+    <button id="update-${idtex["books"].id}" value="Update"
             onclick="loadForm"> Update </button>
 
-    <button id="delete-${id["books"].id}" value="Delete"
+    <button id="delete-${idtex["books"].id}" value="Delete"
             onclick="deleteBook(event, id=this.id)">Delete</button>
         </div>
-        <div id="book-div-${id["books"].id}">
-        {% csrf_token %}
+        <div id="book-div-${idtex["books"].id}">
+        
 
     </div>`
                 console.log(newelem)
-                document.body.appendChild(newelem)
+                document.getElementById("whole").appendChild(newelem)
 
 
                 obj = document.getElementById("form-div")

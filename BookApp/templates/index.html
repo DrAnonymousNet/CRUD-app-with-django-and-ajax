@@ -6,6 +6,7 @@
     <title>Index</title>
 </head>
 <body>
+<div id="whole">
     {% for book in books%}
 
     <div class="container" id="container-{{ book.id }}">
@@ -27,7 +28,7 @@
 
     </div>
         </div>
-        </div>
+
 
     <script>
         document.getElementById("update-{{book.id}}").addEventListener("click", loadUpdateForm)
@@ -72,6 +73,7 @@
 
 
 
+</div>
     <button id="create" type="button"> Create New Book </button>
 
 
