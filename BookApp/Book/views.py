@@ -42,13 +42,10 @@ def book_create(request):
 
 def update_delete_book(request, id):
     is_ajax = request.headers.get("X-Requested-With") == "XMLHttpRequest"
-    print("YESSSS OOOOdce")
     if is_ajax:
-        print("YESSSS OOOO")
         if request.method == "PUT":
-            print("YESSSS OOOO")
             obj = Book.objects.get(id=id)
-            print("YESSSS")
+
             data = json.load(request)
             updated_data = data.get("payload")
 
