@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+    {% for book in books%}
+
+    <div class="container" id="container-{{ book.id }}">
+        <div id="individual_book">
+
+            <p id="book-{{book.id}}">{{book.name}}</p>
+            <p id="book-author-{{book.id}}">{{book.author}}</p>
+            <p id="book-isbn-{{book.id}}">{{book.isbn}}</p>
+
+    <button id="update-{{book.id}}" value="Update"
+            onclick="loadForm"> Update </button>
+
+    <button id="delete-{{book.id}}" value="Delete"
+            onclick="deleteBook(event, id=this.id)">Delete</button>
+        </div>
+        <div id="book-div-{{book.id}}">
+        {% csrf_token %}
+
+
+    </div>
+        </div>
+        </div>
+
+    <script>
+        document.getElementById("update-{{book.id}}").addEventListener("click", loadUpdateForm)
+        function loadUpdateForm(e) {
+            e.preventDefault()
+
+            let output = ""
+            output +=`<div class="col-4 offset-4 mb-5 mt-5">
+        <div class="content-section">
+            <form method="POST" enctype="multipart/form-data">
+
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Create Post</legend>
+                  <tr><th><label for="id_name">Name:</label></th><td><input type="text" name="name" maxlength="60" required id="id_name" value="{{book.name}}"></td></tr>
+<tr><th><label for="id_author">Author:</label></th><td><input type="text" name="author" maxlength="50" required id="id_author" value="{{book.author}}"></td></tr>
+<tr><th><label for="id_isbn">Isbn:</label></th><td><input type="text" name="isbn" maxlength="50" required id="id_isbn" value="{{book.isbn}}"></td></tr>
+                </fieldset>
+
+            </form>
+            <form id="updateform" class="form-group">
+        <input class="btn btn-outline.info" type="submit" value="submit" onclick="updateBook(event, id={{book.pk}})">
+
+                </form>
+        </div>
+</div>`
+            //console.log(output)
+                document.getElementById("book-div-{{book.id}}").innerHTML = output
+
+
+        }
+
+
+
+    </script>
+    {% endfor %}
+
+    <div id = "form-div">
+        {% csrf_token %}
+
+
+    </div>
+
+
+
+    <button id="create" type="button"> Create New Book </button>
+
+
+
+
+    <script src = '{% static "js/main.js"%}'>
+
+
+    </script>
+</body>
+
+</html>
