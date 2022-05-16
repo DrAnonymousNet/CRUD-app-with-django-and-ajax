@@ -9,7 +9,7 @@
             e.preventDefault()
 
             let output = ""
-            output +=`<div class="col-4 offset-4 mb-5 mt-5">
+            output +=`<div class="col-4 offset-4 mb-5 mt-5" ïd="form-1">
         <div class="content-section">
             <form method="POST" enctype="multipart/form-data">
                 
@@ -50,6 +50,32 @@
             let isbn = document.getElementById("id_isbn").value
             let author = document.getElementById("id_author").value
             xhr.onload= function(){
+                idtex = JSON.parse(xhr.responseText)
+                newelem = document.createElement("div")  //document.getElementById(`container-id`)
+                newelem.setAttribute("id", `container-${idtex["books"].id}`)
+
+                newelem.innerHTML =` <div id="individual_book">
+
+            <p id="book-${idtex["books"].id}">${idtex["books"].name}</p>
+            <p id="book-author-${idtex["books"].id}">${idtex["books"].author}</p>
+            <p id="book-isbn-${idtex["books"].id}">${idtex["books"].isbn}</p>
+
+    <button id="update-${idtex["books"].id}" value="Update"
+            onclick="loadForm"> Update </button>
+
+    <button id="delete-${idtex["books"].id}" value="Delete"
+            onclick="deleteBook(event, id=this.id)">Delete</button>
+        </div>
+        <div id="book-div-${idtex["books"].id}">
+        
+
+    </div>`
+                console.log(newelem)
+                document.getElementById("whole").appendChild(newelem)
+
+
+                obj = document.getElementById("form-div")
+                obj.innerHTML = " "
 
             }
 
@@ -84,6 +110,11 @@ function deleteBook(e, id) {
     xhr.open("DELETE", `/book/${id}`, true)
     xhr.setRequestHeader("X-Requested-With","XMLHttpRequest")
     xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"))
+    xhr.onload = function(){
+        if(xhr.status === 200){
+            document.getElementById(`container-${id}`).innerHTML = " "
+        }
+    }
     xhr.send()
 
 
@@ -112,6 +143,7 @@ function deleteBook(e, id) {
                 document.getElementById(`book-${id}`).innerText = output["book"].name
                 document.getElementById(`book-author-${id}`).innerText = output["book"].author
                 document.getElementById(`book-isbn-${id}`).innerText = output["book"].isbn
+                document.getElementById(`book-div-${id}`).innerHTML = " "
 
 
             }
