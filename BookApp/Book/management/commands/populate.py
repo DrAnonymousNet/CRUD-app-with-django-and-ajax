@@ -5,9 +5,16 @@ from Book.models import Book
 
 class Command(BaseCommand):
     help = "Populates the database with the data above"
+    def add_arguments(self, parser):
+        parser.add_argument("data" , nargs=3)
+        parser.add_argument("-i", action="store-true",
+                            required=False)
+
+
 
     def handle(self, *args, **options):
         try:
+
             for data in book_data:
                 new_book = Book.objects.create(name=data["name"],
                                                author=data["author"],
