@@ -19,4 +19,4 @@ Javascript Dom Manipulation and client server communication happening via Ajax's
 
 # Note 
 
-If you wish to work on the frontend, kindly send a `pull request `
+If you wish to work on the frontend, kindly send a `pull request
