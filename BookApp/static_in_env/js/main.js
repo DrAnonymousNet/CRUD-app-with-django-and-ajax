@@ -1,4 +1,6 @@
- document.getElementById("create").addEventListener("click", loadForm)
+//Ajax
+
+document.getElementById("create").addEventListener("click", loadForm)
         function getUpdateForm(id) {
             console.log(id)
             loadForm(e)
